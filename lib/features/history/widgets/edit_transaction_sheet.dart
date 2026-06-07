@@ -57,6 +57,8 @@ class _EditTransactionSheetState extends ConsumerState<EditTransactionSheet> {
         return PhosphorIconsRegular.car;
       case 'Miscellaneous':
         return PhosphorIconsRegular.dotsThree;
+      case 'Fixed Expense':
+        return PhosphorIconsRegular.buildings;
       // Income Categories
       case 'Parents':
         return PhosphorIconsRegular.house;

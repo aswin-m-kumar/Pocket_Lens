@@ -8,12 +8,14 @@ class BalanceCard extends StatelessWidget {
   final double balance;
   final double monthlyIncome;
   final double monthlyExpense;
+  final String periodLabel;
 
   const BalanceCard({
     super.key,
     required this.balance,
     required this.monthlyIncome,
     required this.monthlyExpense,
+    this.periodLabel = 'This Month',
   });
 
   @override
@@ -51,7 +53,7 @@ class BalanceCard extends StatelessWidget {
           ),
           const SizedBox(height: 8),
 
-          // Balance Amount Row
+          // Balance Amount Row — ALL-TIME balance
           Row(
             crossAxisAlignment: CrossAxisAlignment.baseline,
             textBaseline: TextBaseline.alphabetic,
@@ -70,7 +72,7 @@ class BalanceCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
 
-          // Badges Row
+          // Badges Row — period-scoped income/expense
           Row(
             children: <Widget>[
               // Income badge

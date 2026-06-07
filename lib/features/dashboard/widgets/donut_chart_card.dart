@@ -29,6 +29,8 @@ class _DonutChartCardState extends State<DonutChartCard> {
         return kCatEntertain;
       case 'Travel':
         return kCatTravel;
+      case 'Fixed Expense':
+        return kCatFixed;
       case 'Miscellaneous':
       default:
         return kCatMisc;
@@ -43,6 +45,8 @@ class _DonutChartCardState extends State<DonutChartCard> {
         return 'Entertain';
       case 'Travel':
         return 'Travel';
+      case 'Fixed Expense':
+        return 'Fixed';
       case 'Miscellaneous':
         return 'Misc';
       default:
@@ -57,6 +61,7 @@ class _DonutChartCardState extends State<DonutChartCard> {
       'Entertainment',
       'Travel',
       'Miscellaneous',
+      'Fixed Expense',
     ];
     final List<String> activeCats = categories.where((String cat) {
       return (widget.breakdown[cat] ?? 0.0) > 0.0;
@@ -237,6 +242,7 @@ class _DonutChartCardState extends State<DonutChartCard> {
       'Entertainment',
       'Travel',
       'Miscellaneous',
+      'Fixed Expense',
     ];
     return Wrap(
       alignment: WrapAlignment.center,

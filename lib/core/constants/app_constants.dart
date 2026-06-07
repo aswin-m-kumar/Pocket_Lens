@@ -3,6 +3,7 @@ const List<String> expenseCategories = <String>[
   'Entertainment',
   'Travel',
   'Miscellaneous',
+  'Fixed Expense',
 ];
 
 const List<String> incomeCategories = <String>[
@@ -19,4 +20,11 @@ const List<String> historyFilters = <String>[
   'This Month',
   'This Year',
   'All Time',
+];
+
+const List<String> dashboardFilters = <String>[
+  'Today',
+  'This Week',
+  'This Month',
+  'This Year',
 ];

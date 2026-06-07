@@ -19,3 +19,4 @@ const kCatFood = Color(0xFFFF9F43);
 const kCatEntertain = Color(0xFF54A0FF);
 const kCatTravel = Color(0xFFA29BFE);
 const kCatMisc = Color(0xFF636E72);
+const kCatFixed = Color(0xFFFD79A8);

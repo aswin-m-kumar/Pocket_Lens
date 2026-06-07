@@ -1,36 +1,38 @@
 # Pocket Lens — Minimalist Offline Expense Tracker
 
-Pocket Lens is a lightweight, offline-first Android expense tracking application designed for college students with irregular income. 
+Pocket Lens is a lightweight, offline-first expense tracking application built for Android, designed with a focus on simplicity, speed, and beautiful, high-density dashboard layouts. 
 
 The application is built to answer three simple questions immediately:
-1. **How much money is currently available?**
-2. **Where is money being spent?**
-3. **What are the spending patterns over time?**
+1. **How much money is currently available?** (All-time net balance)
+2. **Where is money being spent?** (Dynamic category breakdown and donut charts)
+3. **What are the spending patterns over time?** (Period-based analytics & automated insights)
 
 ---
 
 ## 🛠️ Technology Stack
 
-- **Framework:** [Flutter](https://flutter.dev/) (Latest stable)
+- **UI Framework:** [Flutter](https://flutter.dev/) (Latest stable)
 - **State Management:** [Riverpod](https://riverpod.dev/) (v2 with Notifiers)
-- **Local Database:** [Isar Database](https://isar.dev/) (High-performance, offline-first NoSQL)
-- **Charts:** [fl_chart](https://pub.dev/packages/fl_chart)
+- **Local Database:** [Isar Database](https://isar.dev/) (High-performance, offline-first NoSQL with custom schema indexes)
+- **Charts:** [fl_chart](https://pub.dev/packages/fl_chart) (Custom interactive donut charts)
+- **Fonts & Typography:** [Google Fonts - DM Sans](https://fonts.google.com/specimen/DM+Sans) (Clean, geometric, tight letter-spacing for amounts)
 - **Icons:** [Phosphor Icons](https://pub.dev/packages/phosphoricons_flutter) (Consistent, rounded weights)
-- **Architecture:** Feature-First Clean Architecture (Simplified)
+- **Architecture:** Feature-First Clean Architecture (Simplified for agility)
 
 ---
 
 ## ✨ Core Features
 
-### 1. Dashboard Tab
-- **Current Balance Card:** Highly prominent top-level hero card showing active digital funds. Includes live indicators for monthly income and expenses.
-- **Quick Summary Indicators:** Simple cards tracking Today, Week, and Month spending alongside Monthly Income.
-- **Interactive Donut Chart:** Renders category breakdown for expenses. Tapping a segment highlights it and dynamically shows the category and percentage inside the center hole.
-- **Insights Card:** Swipe-based carousel displaying daily averages, week-over-week spending changes, and top income frequencies.
+### 1. Interactive Dashboard Tab
+- **Period Filter Bar:** Sleek, horizontal sliding selectors (**Today**, **This Week**, **This Month**, and **This Year**) that instantly and reactively update the entire screen's metrics.
+- **Hero Balance Card:** Prominent top-level card displaying all-time net balance along with period-aware Income and Expense summaries corresponding to the active filter.
+- **Category Breakdown Card:** A gorgeous, interactive panel showing a structured list of expenditures categorized and sorted by highest amount. Includes matching HSL progress bars showing category percentages and Phosphor icons.
+- **Donut Chart Card:** Renders category breakdown for expenses. Tapping a segment highlights it and dynamically shows the category and percentage inside the center hole.
+- **Insights Carousel:** A swipe-based card rotating daily averages, week-over-week spending changes, and top income frequencies.
 
 ### 2. Add Transaction Tab
-- **5-Second Log Flow:** Focuses the amount text field automatically when opened and displays the numeric keyboard.
-- **Recent Amount suggestions:** Chips cached in `SharedPreferences` allowing the user to tap and instantly fill the amount for repeating transactions.
+- **5-Second Log Flow:** Focuses the amount text field automatically when opened and displays the numeric decimal keyboard.
+- **Quick Amount Suggestions:** LRU-evicting chips cached in `SharedPreferences` allowing the user to tap and instantly fill the amount for repeating transactions.
 - **Animated Toggle:** Slides smoothly between Expense and Income tabs.
 - **Dynamic Category Selector:** Automatically updates category chips depending on the type selected.
 
@@ -43,13 +45,32 @@ The application is built to answer three simple questions immediately:
 
 ---
 
+## 🎨 Design System
+
+Pocket Lens uses a refined dark utility design system reminiscent of premium dashboard panels. 
+
+### Color Palette
+- **Scaffold Background:** `kBgDeep` (`#0E0E11`)
+- **Card Background:** `kBgCard` (`#1A1A1F`)
+- **Modals/Sheets:** `kBgElevated` (`#232329`)
+- **Subtle Borders:** `kBorderSubtle` (`#2C2C34`)
+- **Primary Text:** `kTextPrimary` (`#F0F0F5`)
+- **Secondary Text:** `kTextSecondary` (`#8E8E9A`)
+- **Accent Color:** `kAccent` (`#7B7FF5`) — Indigo-lavender
+- **Semantic Colors:**
+  - Income / Positives: `kColorIncome` (`#3DD68C`) — Green
+  - Expense / Negatives: `kColorExpense` (`#FFFF6B6B`) — Coral Red
+- **Category-specific Palette:** Food (`#FF9F43`), Entertainment (`#54A0FF`), Travel (`#A29BFE`), Fixed (`#FD79A8`), Misc (`#636E72`)
+
+---
+
 ## 📐 Project Structure
 
 ```
 lib/
 ├── core/
 │   ├── theme/          # HSL Color palette, typography, App theme (DM Sans)
-│   ├── constants/      # Static categories and filter keys
+│   ├── constants/      # Static categories, dashboard filters, and keys
 │   └── utils/          # Indian Rupee formatter, date utilities, and pure math analytics engine
 │
 ├── database/
@@ -57,9 +78,12 @@ lib/
 │   └── models/         # Transaction schema model and auto-generated classes
 │
 ├── repositories/       # Abstract repository interfaces and Isar implementations
+│
 ├── providers/          # CRUD providers, shared preferences state, and derived balance/analytics
+│
 ├── features/
 │   ├── dashboard/      # Dashboard screen and widgets
+│   │   └── widgets/    # Balance card, donut chart, category breakdown card, insights
 │   ├── add_transaction/# Add Transaction screen and form components
 │   └── history/        # History list, filter bar, edit bottom sheet
 │
